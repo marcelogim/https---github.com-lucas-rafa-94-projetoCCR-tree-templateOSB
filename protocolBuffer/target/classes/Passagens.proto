@@ -1,0 +1,112 @@
+package messagesjava;
+
+option java_package = "messagesjava";
+option java_outer_classname = "PassagemProto";
+
+// versao = 1.7
+message PassagemEntrada {
+  enum MotivoReenvio {
+    SEM_MOTIVO_REENVIO = 0;
+    CAT_DIVERGENTE = 1;
+    DADOS_INVALIDOS = 2;
+  }
+  
+  enum Categoria {
+    SEM_CATEGORIA = 0;
+    CAT01 = 1; // 2 eixos, rodagem simples
+    CAT02 = 2; // 2 eixos, rodagem dupla
+    CAT03 = 3; // 3 eixos, rodagem dupla
+    CAT04 = 4; // 4 eixos, rodagem dupla
+    CAT05 = 5; // 5 eixos, rodagem dupla
+    CAT06 = 6; // 6 eixos, rodagem dupla
+    CAT07 = 7; // 3 eixos, rodagem simples
+    CAT08 = 8; // 4 eixos, rodagem simples
+    CAT61 = 61; // 7 eixos, rodagem dupla
+    CAT62 = 62; // 8 eixos, rodagem dupla
+    CAT63 = 63; // 9 eixos, rodagem dupla
+    CAT64 = 64; // 10 eixos, rodagem dupla
+    CAT65 = 65; // 11 eixos, rodagem dupla
+    CAT66 = 66; // 12 eixos, rodagem dupla
+    CAT67 = 67; // 13 eixos, rodagem dupla
+    CAT68 = 68; // 14 eixos, rodagem dupla
+    CAT69 = 69; // 15 eixos, rodagem dupla
+    CAT16 = 16; // 16 eixos, rodagem dupla
+    CAT17 = 17; // 17 eixos, rodagem dupla
+    CAT18 = 18; // 18 eixos, rodagem dupla
+    CAT19 = 19; // 19 eixos, rodagem dupla
+    CAT20 = 20; // 20 eixos, rodagem dupla
+    CAT21 = 21; // 21 eixos, rodagem dupla
+    CAT22 = 22; // 22 eixos, rodagem dupla
+    CAT23 = 23; // 23 eixos, rodagem dupla
+    CAT24 = 24; // 24 eixos, rodagem dupla
+    CAT25 = 25; // 25 eixos, rodagem dupla
+    CAT26 = 26; // 26 eixos, rodagem dupla
+    CAT27 = 27; // 27 eixos, rodagem dupla
+    CAT28 = 28; // 28 eixos, rodagem dupla
+    CAT29 = 29; // 29 eixos, rodagem dupla
+    CAT30 = 30; // 30 eixos, rodagem dupla
+    CAT31 = 31; // 31 eixos, rodagem dupla
+    CAT32 = 32; // 32 eixos, rodagem dupla
+    CAT33 = 33; // 33 eixos, rodagem dupla
+    CAT34 = 34; // 34 eixos, rodagem dupla
+    CAT35 = 35; // 35 eixos, rodagem dupla
+    CAT36 = 36; // 36 eixos, rodagem dupla
+    CAT37 = 37; // 37 eixos, rodagem dupla
+    CAT38 = 38; // 38 eixos, rodagem dupla
+    CAT39 = 39; // 39 eixos, rodagem dupla
+    CAT40 = 40; // 40 eixos, rodagem dupla
+    CAT41 = 41; // 41 eixos, rodagem dupla
+    CAT42 = 42; // 42 eixos, rodagem dupla
+    CAT43 = 43; // 43 eixos, rodagem dupla
+    CAT44 = 44; // 44 eixos, rodagem dupla
+    CAT45 = 45; // 45 eixos, rodagem dupla
+    CAT46 = 46; // 46 eixos, rodagem dupla
+    CAT47 = 47; // 47 eixos, rodagem dupla
+    CAT48 = 48; // 48 eixos, rodagem dupla
+  }
+  
+  enum MotivoSemValor {
+    SEM_MOTIVO_SEM_VALOR = 0;
+    BLOQUEADO = 1;
+    TAG_VIOLADO = 2;
+    GRUPO_ISENTO = 3;
+    TAG_MAL_INSTALADO = 4;
+    COBRANCA_INDEVIDA = 5;
+    ISENTADO_CONCESSIONARIA = 6;
+  }
+  
+  enum MotivoManual {
+    SEM_MOTIVO_MANUAL = 0;
+    PASS_BLOQUEADA = 1;
+    FALHA_TAG = 2;
+    PISTA_MANUTENCAO = 3;
+    VEICULO_LARGO = 4;
+    VEICULO_GUINCHADO = 5;
+  }
+  
+  optional uint64 tagId = 1;
+  optional string placa = 2;
+  optional uint64 datahora = 3;
+  optional uint64 passagemId = 4;
+  optional uint32 reenvio = 5;
+  optional MotivoReenvio motivoReenvio = 6 [default = SEM_MOTIVO_REENVIO];
+  optional uint32 praca = 7;
+  optional uint32 pista = 8;
+  optional Categoria catCadastrada = 9 [default = SEM_CATEGORIA];
+  optional Categoria catDetectada = 10 [default = SEM_CATEGORIA];
+  optional Categoria catCobrada = 11 [default = SEM_CATEGORIA];
+  optional uint32 valor = 12;
+  optional MotivoSemValor motivoSemValor = 13 [default = SEM_MOTIVO_SEM_VALOR];
+  optional bool nivelBateria = 14;
+  optional bool tagViolado = 15;
+  optional bool passAutomatica = 16;
+  optional MotivoManual motivoManual = 17 [default = SEM_MOTIVO_MANUAL];
+}
+
+message Passagem {
+  optional uint32 concessionariaId = 1;
+  optional uint64 sequencial = 2;
+  repeated PassagemEntrada passagem = 3;
+  optional uint32 osaId = 4;
+  optional uint32 serie = 5;
+}
